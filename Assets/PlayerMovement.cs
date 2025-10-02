@@ -9,24 +9,69 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f; // Força do pulo
 
     private Rigidbody2D rb; // Referência ao Rigidbody2D
+    private Animator animator; // Referência ao Animator
+    private SpriteRenderer spriteRenderer; // Referência ao SpriteRenderer
     public bool isGrounded = true; // Verifica se o jogador está no chão
+
 
     void Start()
     {
         // Obtém o componente Rigidbody2D do GameObject
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
+    {
+        UpdateAnimator();
+        Movement();
+        Jump();
+        Attack();
+    }
+
+    private void UpdateAnimator()
+    {
+        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("IsJumping", !isGrounded);
+    }
+
+    private void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            animator.SetTrigger("Attack");
+        }
+    }
+
+    private void Jump()
+    {
+        // Pulo
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    private void Movement()
     {
         // Movimento horizontal
         float moveInput = Input.GetAxis("Horizontal"); // Captura entrada do teclado (A/D ou setas)
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
-        // Pulo
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        // Inverte a direção do sprite do personagem
+        MirrorSprite(moveInput);
+    }
+
+    private void MirrorSprite(float moveInput)
+    {
+        if (moveInput < 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
     }
 
