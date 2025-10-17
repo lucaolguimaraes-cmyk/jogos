@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 158971013}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +388,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 1.0331323
+  orthographic size: 1.3630455
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -510,8 +510,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542142049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0447, y: -2.0989, z: 0.36157957}
-  m_LocalScale: {x: 5.4757075, y: 2.0264401, z: 1}
+  m_LocalPosition: {x: -0.0047, y: -1.9286, z: 0.36157957}
+  m_LocalScale: {x: 5.412189, y: 2.3551288, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -767,6 +767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9bb60f730093e49847607484659ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1.2
   jumpForce: 3
   isGrounded: 1
