@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SistemaDeVida : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class SistemaDeVida : MonoBehaviour
 
     protected virtual void Morrer()
     {
-        Debug.Log("Morreu");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
     internal void AplicarDano(object dano)
