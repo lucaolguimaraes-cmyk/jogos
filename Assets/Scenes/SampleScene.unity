@@ -360,7 +360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -294, y: 85}
+  m_AnchoredPosition: {x: -157, y: 38}
   m_SizeDelta: {x: 37.0272, y: 55.8373}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500043079
@@ -772,7 +772,7 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.16484928, y: -0.020072356}
@@ -1170,11 +1170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4996354438319462026, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.384
+      value: -2.367
       objectReference: {fileID: 0}
     - target: {fileID: 4996354438319462026, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1269
+      value: -0.862
       objectReference: {fileID: 0}
     - target: {fileID: 4996354438531171591, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalScale.x
@@ -1186,11 +1186,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4996354438531171591, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.074
+      value: 1.104
       objectReference: {fileID: 0}
     - target: {fileID: 4996354438531171591, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.146
+      value: -0.797
       objectReference: {fileID: 0}
     - target: {fileID: 4996427395406392815, guid: 00520a4bf2d12e94ea3e87a73c1ec749, type: 3}
       propertyPath: m_LocalScale.x
@@ -1608,7 +1608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276618215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.463, y: -2.892, z: 0}
+  m_LocalPosition: {x: -2.387, y: -2.8, z: 0}
   m_LocalScale: {x: 1.2458, y: 1.2506, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1723,8 +1723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 214.49, y: -227.10403}
-  m_SizeDelta: {x: 428.98, y: 100.7838}
+  m_AnchoredPosition: {x: 214.49, y: -208.05281}
+  m_SizeDelta: {x: 428.98, y: 138.8862}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1527984692
 MonoBehaviour:
@@ -2180,11 +2180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 656925522586530807, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.202
+      value: 1.188
       objectReference: {fileID: 0}
     - target: {fileID: 656925522586530807, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8766
+      value: -2.801
       objectReference: {fileID: 0}
     - target: {fileID: 656925522586530807, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2286,6 +2286,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7226126309295884738, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
+      propertyPath: knockbackForce
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7226126309295884739, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: barraDeVida
       value: 
@@ -2296,7 +2300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7226126309295884740, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_Size.y
-      value: 0.2519936
+      value: 0.24652395
       objectReference: {fileID: 0}
     - target: {fileID: 7226126309295884740, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_Offset.x
@@ -2304,7 +2308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7226126309295884740, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_Offset.y
-      value: -0.08003935
+      value: -0.07730453
       objectReference: {fileID: 0}
     - target: {fileID: 7226126309295884740, guid: 32c4291d7654b3c4facf45624e335fc9, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -2511,6 +2515,10 @@ PrefabInstance:
     - target: {fileID: 8397469372976106006, guid: caee09294463b74448e6a18a34ce83d8, type: 3}
       propertyPath: m_Name
       value: Square
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397469372976106006, guid: caee09294463b74448e6a18a34ce83d8, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caee09294463b74448e6a18a34ce83d8, type: 3}
