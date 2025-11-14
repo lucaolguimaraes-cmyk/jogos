@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         Attack();
         UpdateAnimator();
+        MirrorChildren();   // <<< ATUALIZA OS FILHOS A CADA FRAME
     }
 
     private void UpdateAnimator()
@@ -67,7 +68,26 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer.flipX = true; // olhando pra esquerda
         }
-        // se moveInput == 0 → mantém o lado atual
+    }
+
+    // ================================================
+    // NOVO CÓDIGO – Mirror Children
+    // ================================================
+    private void MirrorChildren()
+    {
+        foreach (var child in transform.GetComponentsInChildren<Transform>())
+        {
+            if (child == transform) continue;  // não girar o player em si
+
+            Quaternion newRotation = Quaternion.identity;
+
+            if (spriteRenderer.flipX)
+            {
+                newRotation = Quaternion.Euler(0, 180f, 0);
+            }
+
+            child.localRotation = newRotation;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
