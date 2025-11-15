@@ -8,6 +8,7 @@ TagManager:
   - isGrounded
   - Inimigo
   - AtaqueJogador
+  - Boss
   layers:
   - Default
   - TransparentFX
