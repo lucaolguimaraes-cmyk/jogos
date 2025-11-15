@@ -1,13 +1,16 @@
-
-public class SistemaDeVidaInimigo : SistemaDeVida
+public class SistemaDeVidaBoss : SistemaDeVida
 {
-    Inimigo inimigo;
+    Boss boss;
     BarraDeVidaInimigo barraDeVidaInimigo;
+
     new void Start()
     {
-        base.Start();
-        inimigo = GetComponent<Inimigo>();
+        boss = GetComponent<Boss>();
         barraDeVidaInimigo = GetComponentInChildren<BarraDeVidaInimigo>();
+
+        // Boss usa maxHealth definido no script Boss
+        vidaMaxima = boss.maxHealth;
+        vidaAtual = vidaMaxima;
     }
 
     public override void AplicarDano(float dano)
@@ -18,16 +21,17 @@ public class SistemaDeVidaInimigo : SistemaDeVida
             Morrer();
         }
 
-        inimigo.AnimacaoDeDano();
-        inimigo.EfeitoDePiscar();
-        inimigo.EfeitoDeRecuo();
+        boss.AnimacaoDeDano();
+        boss.EfeitoDePiscar();
+        boss.EfeitoDeRecuo();
         AtualizarVida();
     }
 
-    override protected void Morrer()
+    protected override void Morrer()
     {
-        inimigo.AnimacaoDeMorte();
+        boss.AnimacaoDeMorte();
     }
+
     void AtualizarVida()
     {
         barraDeVidaInimigo.AtualizarUI(vidaAtual / vidaMaxima);

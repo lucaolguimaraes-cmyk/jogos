@@ -12,13 +12,24 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // -------------------------------
-    // NOVO SISTEMA DE DETECÇÃO DE CHÃO
+    // GROUND CHECK
     // -------------------------------
     [Header("Ground Check")]
     public Transform GroundCheck;
     public float GroundRadius = 0.2f;
     public LayerMask whatIsGround;
     public bool isGrounded;
+
+    // -------------------------------
+    // DASH SYSTEM
+    // -------------------------------
+    [Header("Dash Settings")]
+    public float dashForce = 15f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
+
+    private bool isDashing = false;
+    private bool canDash = true;
 
     void Start()
     {
@@ -30,15 +41,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckGround();
-        Movement();
+
+        if (!isDashing)
+            Movement(); // Desabilita movimento comum durante o dash
+
         Jump();
         Attack();
+        Dash();
         UpdateAnimator();
         MirrorChildren();
     }
 
     // -------------------------------
-    // DETECÇÃO DE CHÃO CORRIGIDA
+    // GROUND CHECK
     // -------------------------------
     private void CheckGround()
     {
@@ -59,9 +74,39 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // -------------------------------
+    // DASH SYSTEM
+    // -------------------------------
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // Remova "isGrounded" se quiser dash no ar
+        {
+            StartCoroutine(DashRoutine());
+        }
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        canDash = false;
+        isDashing = true;
+
+        animator.SetTrigger("Dash");
+
+        float dashDirection = spriteRenderer.flipX ? -1 : 1;
+
+        rb.velocity = new Vector2(dashDirection * dashForce, 0f);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isDashing)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -71,7 +116,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-
         MirrorSprite(moveInput);
     }
 
@@ -97,6 +141,4 @@ public class PlayerMovement : MonoBehaviour
             child.localRotation = newRotation;
         }
     }
-
-    // Removemos OnCollisionEnter2D e OnCollisionExit2D (NÃO SERVEM MAIS)
 }
