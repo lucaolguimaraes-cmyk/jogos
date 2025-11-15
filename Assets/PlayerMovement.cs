@@ -10,7 +10,15 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    public bool isGrounded = true;
+
+    // -------------------------------
+    // NOVO SISTEMA DE DETECÇÃO DE CHÃO
+    // -------------------------------
+    [Header("Ground Check")]
+    public Transform GroundCheck;
+    public float GroundRadius = 0.2f;
+    public LayerMask whatIsGround;
+    public bool isGrounded;
 
     void Start()
     {
@@ -21,11 +29,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        CheckGround();
         Movement();
         Jump();
         Attack();
         UpdateAnimator();
-        MirrorChildren();   // <<< ATUALIZA OS FILHOS A CADA FRAME
+        MirrorChildren();
+    }
+
+    // -------------------------------
+    // DETECÇÃO DE CHÃO CORRIGIDA
+    // -------------------------------
+    private void CheckGround()
+    {
+        isGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundRadius, whatIsGround);
     }
 
     private void UpdateAnimator()
@@ -61,48 +78,25 @@ public class PlayerMovement : MonoBehaviour
     private void MirrorSprite(float moveInput)
     {
         if (moveInput > 0)
-        {
-            spriteRenderer.flipX = false; // olhando pra direita
-        }
+            spriteRenderer.flipX = false;
         else if (moveInput < 0)
-        {
-            spriteRenderer.flipX = true; // olhando pra esquerda
-        }
+            spriteRenderer.flipX = true;
     }
 
-    // ================================================
-    // NOVO CÓDIGO – Mirror Children
-    // ================================================
     private void MirrorChildren()
     {
         foreach (var child in transform.GetComponentsInChildren<Transform>())
         {
-            if (child == transform) continue;  // não girar o player em si
+            if (child == transform) continue;
 
             Quaternion newRotation = Quaternion.identity;
 
             if (spriteRenderer.flipX)
-            {
                 newRotation = Quaternion.Euler(0, 180f, 0);
-            }
 
             child.localRotation = newRotation;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+    // Removemos OnCollisionEnter2D e OnCollisionExit2D (NÃO SERVEM MAIS)
 }
