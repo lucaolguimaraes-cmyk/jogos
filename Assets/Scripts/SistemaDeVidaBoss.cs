@@ -8,22 +8,30 @@ public class SistemaDeVidaBoss : SistemaDeVida
         boss = GetComponent<Boss>();
         barraDeVidaInimigo = GetComponentInChildren<BarraDeVidaInimigo>();
 
-        // Boss usa maxHealth definido no script Boss
         vidaMaxima = boss.maxHealth;
         vidaAtual = vidaMaxima;
+
+        AtualizarVida(); // garante barra cheia no início
     }
 
     public override void AplicarDano(float dano)
     {
+        if (vidaAtual <= 0) return; // já morreu, ignora
+
         vidaAtual -= dano;
+
         if (vidaAtual <= 0)
         {
+            vidaAtual = 0;
             Morrer();
         }
+        else
+        {
+            boss.AnimacaoDeDano();
+            boss.EfeitoDePiscar();
+            boss.EfeitoDeRecuo();
+        }
 
-        boss.AnimacaoDeDano();
-        boss.EfeitoDePiscar();
-        boss.EfeitoDeRecuo();
         AtualizarVida();
     }
 
